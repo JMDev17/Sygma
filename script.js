@@ -1,5 +1,36 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    // 0. Smooth Scroll for Anchor Links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+
+            const targetEl = document.querySelector(targetId);
+            if (targetEl) {
+                e.preventDefault();
+                const navbarHeight = document.getElementById('navbar').offsetHeight;
+                const targetPosition = targetEl.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+
+                // Update URL hash without jumping
+                history.pushState(null, null, targetId);
+
+                // Close mobile menu if open
+                const navLinks = document.querySelector('.nav-links');
+                const navActions = document.querySelector('.nav-actions');
+                if (window.innerWidth <= 768) {
+                    navLinks.style.display = 'none';
+                    navActions.style.display = 'none';
+                }
+            }
+        });
+    });
+
     // 1. Scrolled Navbar Effect
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
@@ -31,13 +62,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3. Mouse Hover Glow Effect on Bento Cards and Pricing Cards
     const glowCards = document.querySelectorAll('.glow-effect');
-    
+
     glowCards.forEach(card => {
         card.addEventListener('mousemove', e => {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
-            
+
             card.style.setProperty('--mouse-x', `${x}px`);
             card.style.setProperty('--mouse-y', `${y}px`);
         });
@@ -48,13 +79,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. Pricing Toggle Logic
     const toggleBtn = document.getElementById('toggle-billing');
     const amounts = document.querySelectorAll('.price .amount');
-    
-    if(toggleBtn) {
+
+    if (toggleBtn) {
         let isYearly = false;
-        
+
         toggleBtn.addEventListener('click', () => {
             isYearly = !isYearly;
-            
+
             // Toggle classes
             if (isYearly) {
                 toggleBtn.classList.add('active');
@@ -65,11 +96,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 toggleBtn.previousElementSibling.classList.add('active');
                 toggleBtn.nextElementSibling.classList.remove('active');
             }
-            
+
             // Animate number change
             amounts.forEach(amount => {
                 amount.style.opacity = '0';
-                
+
                 setTimeout(() => {
                     if (amount.hasAttribute('data-monthly') && amount.hasAttribute('data-yearly')) {
                         if (isYearly) {
@@ -90,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelector('.nav-links');
     const navActions = document.querySelector('.nav-actions');
 
-    if(menuToggle) {
+    if (menuToggle) {
         menuToggle.addEventListener('click', () => {
             // A simple toggle logic, in real life we could animate this properly
             // Since this is a pure CSS/JS solution without complex frameworks
@@ -108,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 navLinks.style.background = 'rgba(5, 5, 7, 0.95)';
                 navLinks.style.padding = '2rem';
                 navLinks.style.boxShadow = '0 10px 30px rgba(0,0,0,0.5)';
-                
+
                 navActions.style.display = 'flex';
                 navActions.style.flexDirection = 'column';
                 navActions.style.position = 'absolute';

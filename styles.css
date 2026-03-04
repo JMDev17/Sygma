@@ -911,6 +911,386 @@ h2 span {
     }
 }
 
+/* How It Works / Como Funciona */
+.how-it-works {
+    position: relative;
+}
+
+.steps-timeline {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+}
+
+.step-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-glass);
+    border-radius: 24px;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    transition: transform 0.4s var(--ease-out-expo), border-color 0.4s ease;
+    width: 100%;
+    max-width: 560px;
+}
+
+.step-card:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-4px);
+}
+
+.step-number {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.step-number span {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+    z-index: 2;
+}
+
+.step-number-glow {
+    position: absolute;
+    inset: -8px;
+    background: radial-gradient(circle, rgba(0, 240, 255, 0.15), transparent 70%);
+    border-radius: 50%;
+    animation: glowPulse 3s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+
+    0%,
+    100% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+.step-icon-wrapper {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.step-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-glass);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+}
+
+.step-icon-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 240, 255, 0.2);
+    animation: ringRotate 8s linear infinite;
+}
+
+.step-icon-ring::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: 50%;
+    width: 6px;
+    height: 6px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--color-primary);
+}
+
+.step-icon-ring.ring-secondary {
+    border-color: rgba(255, 0, 170, 0.2);
+}
+
+.step-icon-ring.ring-secondary::before {
+    background: var(--color-secondary);
+    box-shadow: 0 0 10px var(--color-secondary);
+}
+
+.step-icon-ring.ring-accent {
+    border-color: rgba(112, 0, 255, 0.2);
+}
+
+.step-icon-ring.ring-accent::before {
+    background: var(--color-accent);
+    box-shadow: 0 0 10px var(--color-accent);
+}
+
+@keyframes ringRotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.step-content h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+}
+
+.step-content p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    max-width: 400px;
+}
+
+.step-visual {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+/* Step visual: Data Flow */
+.data-flow {
+    position: relative;
+    width: 200px;
+    height: 4px;
+}
+
+.data-line {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.3), transparent);
+    border-radius: 2px;
+}
+
+.data-dot {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    box-shadow: 0 0 12px var(--color-primary);
+    top: -3px;
+    animation: flowDot 2.5s ease-in-out infinite;
+}
+
+.data-dot.d1 {
+    animation-delay: 0s;
+}
+
+.data-dot.d2 {
+    animation-delay: 0.5s;
+}
+
+.data-dot.d3 {
+    animation-delay: 1s;
+}
+
+@keyframes flowDot {
+    0% {
+        left: 0;
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        left: 100%;
+        opacity: 0;
+    }
+}
+
+/* Step visual: Neural Net */
+.neural-net {
+    position: relative;
+    width: 160px;
+    height: 60px;
+}
+
+.neural-node {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--color-secondary);
+    box-shadow: 0 0 12px var(--color-secondary);
+    animation: neuralPulse 2s ease-in-out infinite;
+}
+
+.neural-node.nn1 {
+    top: 0;
+    left: 0;
+    animation-delay: 0s;
+}
+
+.neural-node.nn2 {
+    top: 50px;
+    left: 30px;
+    animation-delay: 0.3s;
+}
+
+.neural-node.nn3 {
+    top: 10px;
+    left: 70px;
+    animation-delay: 0.6s;
+}
+
+.neural-node.nn4 {
+    top: 45px;
+    left: 110px;
+    animation-delay: 0.9s;
+}
+
+.neural-node.nn5 {
+    top: 5px;
+    left: 145px;
+    animation-delay: 1.2s;
+}
+
+@keyframes neuralPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+
+    50% {
+        transform: scale(1.5);
+        opacity: 1;
+    }
+}
+
+/* Step visual: Rocket Launch */
+.rocket-launch {
+    position: relative;
+    width: 40px;
+    height: 60px;
+}
+
+.rocket-body {
+    position: relative;
+    z-index: 2;
+    animation: rocketFloat 2s ease-in-out infinite;
+}
+
+.rocket-trail {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 40px;
+    background: linear-gradient(to top, transparent, rgba(112, 0, 255, 0.4), transparent);
+    border-radius: 3px;
+    animation: trailPulse 2s ease-in-out infinite;
+}
+
+@keyframes rocketFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes trailPulse {
+
+    0%,
+    100% {
+        opacity: 0.3;
+        height: 30px;
+    }
+
+    50% {
+        opacity: 0.8;
+        height: 50px;
+    }
+}
+
+/* Step Connector */
+.step-connector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: 60px;
+    width: 2px;
+}
+
+.connector-line {
+    position: absolute;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(0, 240, 255, 0.2), rgba(255, 255, 255, 0.1));
+}
+
+.connector-pulse {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    box-shadow: 0 0 12px var(--color-primary);
+    animation: connectorPulse 2s ease-in-out infinite;
+}
+
+@keyframes connectorPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: scale(1.5);
+        opacity: 1;
+    }
+}
+
 /* Pricing Grid */
 .billing-toggle {
     display: inline-flex;
@@ -1347,6 +1727,18 @@ h2 span {
         padding: 4rem 0;
     }
 
+    .step-card {
+        padding: 2rem;
+    }
+
+    .step-content h3 {
+        font-size: 1.25rem;
+    }
+
+    .step-connector {
+        height: 40px;
+    }
+
     .cta-box {
         padding: 3rem 1.5rem;
     }
@@ -1440,6 +1832,28 @@ h2 span {
 
     .cta-box h2 {
         font-size: 1.5rem;
+    }
+
+    .step-card {
+        padding: 1.5rem;
+    }
+
+    .step-icon-wrapper {
+        width: 64px;
+        height: 64px;
+    }
+
+    .step-icon {
+        width: 52px;
+        height: 52px;
+    }
+
+    .step-connector {
+        height: 32px;
+    }
+
+    .step-visual {
+        height: 60px;
     }
 
     .price-card {

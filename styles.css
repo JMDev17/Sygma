@@ -634,8 +634,8 @@ h2 span {
 .bento-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
     gap: 1.5rem;
-    grid-auto-rows: minmax(300px, auto);
 }
 
 /* Glass Card styling */
@@ -646,7 +646,8 @@ h2 span {
     padding: 2.5rem;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 1.5rem;
     position: relative;
     overflow: hidden;
     backdrop-filter: blur(10px);
@@ -654,14 +655,20 @@ h2 span {
 
 .bento-large {
     grid-column: span 2;
-    grid-row: span 2;
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
 }
 
 .bento-wide {
-    grid-column: span 3;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-column: span 2;
+    flex-direction: row;
+    align-items: center;
     gap: 2rem;
+}
+
+.bento-content {
+    flex: 1;
 }
 
 .bento-content h3 {
@@ -693,13 +700,13 @@ h2 span {
 }
 
 .bento-visual {
-    margin-top: 2rem;
     flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    min-height: 150px;
+    min-height: 180px;
+    width: 100%;
 }
 
 /* Specific visuals */
@@ -1098,11 +1105,12 @@ h2 span {
 /* Media Queries */
 @media (max-width: 992px) {
     .bento-grid {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
     }
 
+    .bento-large,
     .bento-wide {
-        grid-template-columns: 1fr;
+        grid-column: span 1;
     }
 
     .pricing-grid {
@@ -1134,9 +1142,14 @@ h2 span {
         grid-template-columns: 1fr;
     }
 
-    .bento-large {
+    .bento-large,
+    .bento-wide {
         grid-column: span 1;
-        grid-row: span 1;
+        flex-direction: column;
+    }
+
+    .bento-card {
+        padding: 2rem;
     }
 
     .footer-grid {
